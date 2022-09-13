@@ -55,17 +55,17 @@ pub fn count_kmers_in_read(hap_a_kmers: &kmer::KmerSet,
 /// In order to make it more pleasant for humans to look at, we multiply
 /// both scaling factors by the size of the larger k-mer set so that the
 /// scaling factors are close to 1.
-pub fn calc_scaling_factors(hap_a_kmers: &kmer::KmerSet,
-                            hap_b_kmers: &kmer::KmerSet) -> (f32, f32) {
-
-    let num_hap_a_kmers = hap_a_kmers.len();
-    let num_hap_b_kmers = hap_b_kmers.len();
-    let max_num_kmers = cmp::max(num_hap_a_kmers, num_hap_b_kmers);
-    let scaling_factor_a = (max_num_kmers as f32) / (num_hap_a_kmers as f32);
-    let scaling_factor_b = (max_num_kmers as f32) / (num_hap_b_kmers as f32);
-
-    (scaling_factor_a, scaling_factor_b)
-}
+/// pub fn calc_scaling_factors(hap_a_kmers: &kmer::KmerSet,
+///                             hap_b_kmers: &kmer::KmerSet) -> (f32, f32) {
+/// 
+///     let num_hap_a_kmers = hap_a_kmers.len();
+///     let num_hap_b_kmers = hap_b_kmers.len();
+///     let max_num_kmers = cmp::max(num_hap_a_kmers, num_hap_b_kmers);
+///     let scaling_factor_a = (max_num_kmers as f32) / (num_hap_a_kmers as f32);
+///     let scaling_factor_b = (max_num_kmers as f32) / (num_hap_b_kmers as f32);
+/// 
+///     (scaling_factor_a, scaling_factor_b)
+/// }
 
 // type alias for something that implements Write. We need this because some of
 // the code in this file opens up either a GzipEncoder or a File and then uses
@@ -117,15 +117,15 @@ pub fn classify_unpaired(hap_a_kmers: kmer::KmerSet,
 
     if num_threads == 1 {
         // calculate read-count scaling factors
-        let (scaling_factor_a, scaling_factor_b) =
-            calc_scaling_factors(&hap_a_kmers, &hap_b_kmers);
+        // let (scaling_factor_a, scaling_factor_b) =
+        //     calc_scaling_factors(&hap_a_kmers, &hap_b_kmers);
 
         for result in input_reader {
             let record = result?;
             let (hap_a_count, hap_b_count) = count_kmers_in_read(
                 &hap_a_kmers, &hap_b_kmers, &record, k)?;
-            let hap_a_score = (hap_a_count as f32) * scaling_factor_a;
-            let hap_b_score = (hap_b_count as f32) * scaling_factor_b;
+            let hap_a_score = (hap_a_count as f32);
+            let hap_b_score = (hap_b_count as f32);
 
             let haplotype;
             if hap_a_score > hap_b_score {
