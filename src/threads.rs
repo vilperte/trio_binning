@@ -119,8 +119,8 @@ pub fn count_kmers_multithreaded<T,U>(hap_a_kmers: kmer::KmerSet,
           U: Write + Send + 'static {
 
     // calculate scaling factors
-    let (scaling_factor_a, scaling_factor_b) =
-        calc_scaling_factors(&hap_a_kmers, &hap_b_kmers);
+    // let (scaling_factor_a, scaling_factor_b) =
+    // calc_scaling_factors(&hap_a_kmers, &hap_b_kmers);
 
     // open up two channels: one for sending SeqRecords from the Reader to
     // the thread pool and one for sending results from the thread pool to
