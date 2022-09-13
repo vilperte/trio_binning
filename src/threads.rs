@@ -69,8 +69,7 @@ fn spawn_counter(hap_a_kmers: Arc<kmer::KmerSet>,
 }
 
 fn spawn_writer<T>(mut hap_a_out: T, mut hap_b_out: T, mut hap_u_out: T,
-                   result_receiver: mpsc::Receiver<ResultMessage>,
-                   scaling_factor_a: f32, scaling_factor_b: f32)
+                   result_receiver: mpsc::Receiver<ResultMessage>)
     -> thread::JoinHandle<()>
     where T: Write + Send + 'static {
 
@@ -78,10 +77,8 @@ fn spawn_writer<T>(mut hap_a_out: T, mut hap_b_out: T, mut hap_u_out: T,
         loop {
             match result_receiver.recv().unwrap() {
                 ResultMessage::Count(results) => {
-                    let hap_a_score = (results.hap_a_count as f32)
-                        * scaling_factor_a;
-                    let hap_b_score = (results.hap_b_count as f32)
-                        * scaling_factor_b;
+                    let hap_a_score = (results.hap_a_count as f32);
+                    let hap_b_score = (results.hap_b_count as f32);
 
                     let haplotype;
                     if hap_a_score > hap_b_score {
