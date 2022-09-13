@@ -1,7 +1,7 @@
 use std::{thread, error, result};
 use std::sync::{Arc, Mutex, mpsc};
 use std::io::{Read, Write};
-use classify::{count_kmers_in_read, calc_scaling_factors};
+use classify::{count_kmers_in_read};
 use seq;
 use kmer;
 
