@@ -156,8 +156,7 @@ pub fn count_kmers_multithreaded<T,U>(hap_a_kmers: kmer::KmerSet,
     }
 
     // spawn a writer thread to write the results of the counting
-    let writer = spawn_writer(hap_a_out, hap_b_out, hap_u_out, result_receiver,
-                              scaling_factor_a, scaling_factor_b);
+    let writer = spawn_writer(hap_a_out, hap_b_out, hap_u_out, result_receiver);
 
     // wait for the reader to finish, which means EOF has been reached, and get
     // ownership of the record sender back
