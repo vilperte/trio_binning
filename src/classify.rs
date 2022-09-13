@@ -124,8 +124,8 @@ pub fn classify_unpaired(hap_a_kmers: kmer::KmerSet,
             let record = result?;
             let (hap_a_count, hap_b_count) = count_kmers_in_read(
                 &hap_a_kmers, &hap_b_kmers, &record, k)?;
-            let hap_a_score = (hap_a_count as f32);
-            let hap_b_score = (hap_b_count as f32);
+            let hap_a_score = hap_a_count as f32;
+            let hap_b_score = hap_b_count as f32;
 
             let haplotype;
             if hap_a_score > hap_b_score {
